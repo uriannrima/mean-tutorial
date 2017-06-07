@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <base href="/">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+</head>
+
+<body ng-app="mean-app">
+    <mean-navbar brand='MEAN App' items='navItems' on-shurasowaka="onNavbarClick(item)"></mean-navbar>
+    <ng-view></ng-view>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="app.config.js"></script>
+    <script src="sections/home/home.controller.js"></script>
+    <script src="sections/categories/categories.controller.js"></script>
+    <script src="components/navbar/navbar.component.js"></script>
+    <script src="directives/mean-input-group.directive.js"></script>
+    <script src="directives/mean-text-strength.directive.js"></script>
+</body>
+
+</html>

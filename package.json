@@ -1,0 +1,14 @@
+{
+  "name": "mean-tutorial",
+  "version": "1.0.0",
+  "description": "A small project to learn MEAN stack.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "author": "Luciano Lima",
+  "license": "ISC",
+  "dependencies": {
+    "lite-server": "^2.3.0"
+  }
+}

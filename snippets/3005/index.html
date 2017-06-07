@@ -1,0 +1,34 @@
+<html ng-app="mean-app">
+
+<head>
+    <title>
+        My MEAN App.
+    </title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div ng-controller="homeController as home">
+        <mean-navbar brand='MEAN App' nav-items='home.navItems' on-item-click="home.onNavbarClick(item)">
+        </mean-navbar>
+        <mean-input-group label='Usuário'></mean-input-group></br>
+        <mean-input-group label='Senha'></mean-input-group>
+        <div>
+            <label>Usuário</label>
+            <input type="text" placeholder="Email" mean-word-strength></br>
+            <label>Senha</label>
+            <input type="password" placeholder="Senha" mean-word-strength/>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="components/mean-navbar.component.js"></script>
+    <script src="directives/mean-input-group.directive.js"></script>
+    <script src="directives/mean-word-strength.directive.js"></script>
+    <script src="directives/mean-input.directive.js"></script>
+    <script src="services/log.service.js"></script>
+    <script src="services/user.service.js"></script>
+    <script src="models/user.model.js"></script>
+</body>
+
+</html>
