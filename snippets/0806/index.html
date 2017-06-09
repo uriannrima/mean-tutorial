@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <base href="/">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+</head>
+
+<body ng-app="mean-app">
+    <div ng-controller="LayoutController as Layout">
+        <mean-navbar brand="MEAN" items="Layout.navbarItems"></mean-navbar>
+        <ng-view></ng-view>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="components/navbar/navbar.component.js"></script>
+    <script src="shared/layout.controller.js"></script>
+    <script src="sections/home/home.controller.js"></script>
+    <script src="sections/todos/todos.controller.js"></script>
+</body>
+
+</html>

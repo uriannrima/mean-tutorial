@@ -16,7 +16,9 @@
         </div>
         <div class="collapse navbar-collapse" ng-class="{ in : $ctrl.isOpen }">
             <ul class="nav navbar-nav">
-                <li ng-repeat="item in $ctrl.items" ng-click="$ctrl.onItemClick(item)"><a href="#">{{ item }}</a></li>
+                <li ng-repeat="item in $ctrl.items" ng-click="$ctrl.onItemClick(item)">
+                    <a ng-href="{{item.link}}">{{ item.label | capitalize }}</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -1,0 +1,25 @@
+<style>
+    body {
+        padding-top: 70px;
+    }
+</style>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="collapsed navbar-toggle" ng-click="$ctrl.toggle()"> 
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+            <a href="#" class="navbar-brand">{{ $ctrl.brand }}</a>
+        </div>
+        <div class="collapse navbar-collapse" ng-class="{ in : $ctrl.isOpen }">
+            <ul class="nav navbar-nav">
+                <li ng-repeat="item in $ctrl.items" ng-click="$ctrl.onItemClick(item)">
+                    <a ng-href="{{item.link}}">{{ item.label }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

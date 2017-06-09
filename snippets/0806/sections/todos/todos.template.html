@@ -1,0 +1,21 @@
+<style>
+    .done {
+        text-decoration: line-through;
+    }
+</style>
+<div>
+    <h1>{{Todos.title}}</h1>
+</div>
+<div>
+    <input type="text" placeholder="Press enter to add or click on the button." ng-keypress="Todos.addTodo($event)" ng-model="Todos.newTodo">
+    <button ng-click="Todos.addTodo()">Add</button>
+</div>
+<div ng-if="Todos.todosList.length">
+    <ul>
+        <li ng-repeat="todo in Todos.todosList track by $index" ng-class="{ done : todo.done }">
+            <input type="checkbox" ng-model="todo.done"> {{ todo.text }}
+            <button ng-click="Todos.removeTodo($index, todo)">X</button>
+        </li>
+    </ul>
+    <button ng-click="Todos.clearDone()">Clear done!</button>
+</div>

@@ -1,6 +1,7 @@
-app.component('meanNavbar', {
+angular.module('mean-app').component('meanNavbar', {
     templateUrl: './components/navbar/navbar.template.html',
     controller: function () {
+        var vm = this;
         this.isOpen = false;
 
         this.toggle = function () {
