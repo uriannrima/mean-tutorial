@@ -1,0 +1,60 @@
+<style>
+    .done {
+        text-decoration: line-through;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <h1>{{Todos.title}}</h1>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">New Todo</span>
+                <input type="text" class="form-control" placeholder="Description" aria-describedby="basic-addon1" ng-keypress="Todos.addTodo($event)"
+                    ng-model="Todos.newTodo">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" ng-click="Todos.addTodo()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+                </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-if="Todos.todosList.length" style="margin-top: 20px;">
+                <ul class="list-group">
+                    <li class="list-group-item clearfix" ng-repeat="todo in Todos.todosList track by $index" ng-class="{ done : todo.done }">
+                        <div ng-if="!todo.edit">
+                            <input type="checkbox" ng-model="todo.done">
+                            <span ng-if="!todo.edit" style="vertical-align: top">{{ todo.text }}</span>
+                            <span class="pull-right">
+                            <button class="btn btn-info" ng-click="todo.edit = true">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-danger" ng-click="Todos.removeTodo($index, todo)">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                            </span>
+                        </div>
+                        <div ng-if="todo.edit">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">Edit Todo</span>
+                                <input type="text" class="form-control" placeholder="Description" aria-describedby="basic-addon1" ng-model="todo.text">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" type="button" ng-click="todo.edit = false">
+                                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <button class="btn btn-danger" ng-click="Todos.clearDone()">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete done.                    
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

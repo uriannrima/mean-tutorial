@@ -1,0 +1,14 @@
+{
+  "name": "mean-tutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/uriannrima/mean-tutorial.git",
+  "author": "Luciano Lima <luciano.lima@ingresso.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "scripts": {
+    "dev": "lite-server"
+  }
+}
