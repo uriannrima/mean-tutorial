@@ -1,9 +1,13 @@
 var id = 0;
-angular.module('mean-app').controller('TodosController', function () {
+angular.module('mean-app').controller('TodosController', function (TodosService) {
     var vm = this;
     vm.title = "Todos";
     vm.newTodo = "";
     vm.todosList = [];
+
+    TodosService.getAll().then(function (response) {
+        vm.todosList = response.data;
+    });
 
     vm.resetTodo = function () {
         vm.newTodo = "";
@@ -17,23 +21,35 @@ angular.module('mean-app').controller('TodosController', function () {
         if ($event && $event.key !== "Enter") return;
 
         var newTodo = {
-            id: id,
             text: vm.newTodo,
             done: false,
             edit: false
-        }
+        };
 
-        id += 1;
-
-        vm.todosList.push(newTodo);
-        vm.resetTodo();
+        TodosService.saveOrUpdate(newTodo).then(function (response) {
+            var todo = response.data;
+            vm.todosList.push(todo);
+            vm.resetTodo();
+        }, function (error) {
+            console.log("Error.");
+        });
     }
 
     vm.removeTodo = function ($index, todo) {
-        vm.todosList.splice($index, 1);
+        TodosService.delete(todo.id).then(function () {
+            vm.todosList.splice($index, 1);
+        });
     }
 
-    vm.clearDone = function() {
-        vm.todosList = vm.todosList.filter(todo => !todo.done);
+    vm.clearDone = function () {
+        TodosService.clearDone().then(function (response) {
+            vm.todosList = response.data;
+        });
+    }
+
+    vm.save = function ($index, todo) {
+        TodosService.saveOrUpdate(todo).then(function (response) {
+            todo.edit = false;
+        });
     }
 });

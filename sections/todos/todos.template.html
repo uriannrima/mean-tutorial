@@ -27,7 +27,7 @@
                 <ul class="list-group">
                     <li class="list-group-item clearfix" ng-repeat="todo in Todos.todosList track by $index" ng-class="{ done : todo.done }">
                         <div ng-if="!todo.edit">
-                            <input type="checkbox" ng-model="todo.done">
+                            <input type="checkbox" ng-model="todo.done" ng-click="Todos.save($index, todo)">
                             <span ng-if="!todo.edit" style="vertical-align: top">{{ todo.text }}</span>
                             <span class="pull-right">
                             <button class="btn btn-info" ng-click="todo.edit = true">
@@ -43,7 +43,7 @@
                                 <span class="input-group-addon" id="basic-addon1">Edit Todo</span>
                                 <input type="text" class="form-control" placeholder="Description" aria-describedby="basic-addon1" ng-model="todo.text">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-success" type="button" ng-click="todo.edit = false">
+                                    <button class="btn btn-success" type="button" ng-click="Todos.save($index, todo)">
                                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
                                     </button>
                                 </span>
