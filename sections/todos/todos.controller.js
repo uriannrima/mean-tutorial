@@ -1,4 +1,3 @@
-var id = 0;
 angular.module('mean-app').controller('TodosController', function (TodosService) {
     var vm = this;
     vm.title = "Todos";
@@ -36,7 +35,7 @@ angular.module('mean-app').controller('TodosController', function (TodosService)
     }
 
     vm.removeTodo = function ($index, todo) {
-        TodosService.delete(todo.id).then(function () {
+        TodosService.delete(todo._id).then(function () {
             vm.todosList.splice($index, 1);
         });
     }

@@ -5,7 +5,7 @@ angular.module('mean-app').factory('TodosService', function ($http) {
             return $http.get(apiUrl);
         },
         saveOrUpdate: function (todo) {
-            if (todo.id) {
+            if (todo._id) {
                 return $http.put(apiUrl, { todo: todo });
             } else {
                 return $http.post(apiUrl, { todo: todo });
