@@ -3,15 +3,6 @@ const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 
-var db;
-
-var generateGuid = function () {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
-
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -26,15 +17,17 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/api/todos', function (req, res) {
-    db.collection('todos').find({}).toArray((err, records) => {
+var getAllTodos = function (req, res) {
+    app.db.collection('todos').find({}).toArray().then(records => {
         res.json(records);
     });
-});
+}
+
+app.get('/api/todos', getAllTodos);
 
 app.post('/api/todos', function (req, res) {
     var todo = req.body.todo;
-    db.collection('todos').insertOne({
+    app.db.collection('todos').insertOne({
         text: todo.text,
         done: todo.done
     }).then(result => {
@@ -44,7 +37,7 @@ app.post('/api/todos', function (req, res) {
 
 app.delete('/api/todos/:todoId', function (req, res) {
     var _id = new ObjectId(req.params.todoId);
-    db.collection('todos').deleteOne({ _id }).then(result => {
+    app.db.collection('todos').deleteOne({ _id }).then(result => {
         res.sendStatus(200);
     });
 
@@ -54,19 +47,26 @@ app.put('/api/todos', function (req, res) {
     var todo = req.body.todo;
     const _id = new ObjectId(todo._id);
     delete todo._id;
-    db.collection('todos').findAndModify({ _id }, [], { $set: todo }, { new: true, upsert: true }).then(result => {
+    app.db.collection('todos').findAndModify({ _id }, [], {
+        $set: {
+            text: todo.text,
+            done: todo.done
+        }
+    }, { new: true, upsert: true }).then(result => {
         res.json(result.value);
     });
 });
 
-app.post('/api/todos/clear', function (req, res) {
-    todos = todos.filter(todo => !todo.done);
-    res.json(todos);
-})
+var clearTodosDone = function (req, res, next) {
+    app.db.collection('todos').deleteMany({ done: true }).then(result => {
+        next();
+    });
+}
 
-MongoClient.connect('mongodb://localhost:27017/mean-app', function (err, database) {
-    if (err) throw err;
-    db = database;
+app.post('/api/todos/clear', clearTodosDone, getAllTodos)
+
+MongoClient.connect('mongodb://localhost:27017/mean-app').then(database => {
+    app.db = database;
     app.listen(3003, function () {
         console.log('Listening to ' + 3003);
     });

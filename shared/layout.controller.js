@@ -1,4 +1,4 @@
-angular.module('mean-app').controller('LayoutController', function () {
+export default function LayoutController() {
     var vm = this;
     vm.navbarItems = [
         {
@@ -9,4 +9,4 @@ angular.module('mean-app').controller('LayoutController', function () {
             link: "/todos"
         }
     ];
-});
+}

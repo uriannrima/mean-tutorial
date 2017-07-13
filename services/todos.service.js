@@ -1,4 +1,4 @@
-angular.module('mean-app').factory('TodosService', function ($http) {
+export default function TodosService($http) {
     const apiUrl = "http://localhost:3003/api/todos";
     return {
         getAll: function () {
@@ -18,4 +18,4 @@ angular.module('mean-app').factory('TodosService', function ($http) {
             return $http.post(apiUrl + "/clear");
         }
     }
-});
+}

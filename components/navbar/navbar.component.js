@@ -1,5 +1,5 @@
-angular.module('mean-app').component('meanNavbar', {
-    templateUrl: './components/navbar/navbar.template.html',
+export default {
+    template: require('./navbar.template.html'),
     controller: function () {
         var vm = this;
         this.isOpen = false;
@@ -23,4 +23,4 @@ angular.module('mean-app').component('meanNavbar', {
         user: '=?', // = => Two way binding para dentro do componente
         onShurasowaka: '&' // & => Evento para fora do componente
     }
-});
+}

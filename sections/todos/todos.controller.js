@@ -1,4 +1,4 @@
-angular.module('mean-app').controller('TodosController', function (TodosService) {
+export default function TodosController(TodosService) {
     var vm = this;
     vm.title = "Todos";
     vm.newTodo = "";
@@ -51,4 +51,4 @@ angular.module('mean-app').controller('TodosController', function (TodosService)
             todo.edit = false;
         });
     }
-});
+}

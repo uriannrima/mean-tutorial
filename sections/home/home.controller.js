@@ -1,4 +1,4 @@
-angular.module('mean-app').controller('HomeController', function () {
+export default function HomeController() {
     var vm = this;
     vm.title = "Home";
-});
+}

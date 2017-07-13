@@ -6,9 +6,19 @@
   "author": "Luciano Lima <luciano.lima@ingresso.com>",
   "license": "MIT",
   "dependencies": {
-    "lite-server": "^2.3.0"
+    "angular": "^1.6.5",
+    "angular-route": "^1.6.5",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "lite-server": "^2.3.0",
+    "nodemon": "^1.11.0",
+    "raw-loader": "^0.5.1",
+    "webpack": "^3.2.0"
   },
   "scripts": {
-    "dev": "lite-server"
+    "dev": "lite-server",
+    "api": "nodemon api/server.js",
+    "build": "webpack --config build/webpack.config.js",
+    "watch": "webpack --watch --config build/webpack.config.js"
   }
 }
