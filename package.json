@@ -18,8 +18,6 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config build/webpack.config.js",
-    "api": "nodemon api/server.js",
-    "build": "webpack --config build/webpack.config.js",
-    "watch": "webpack --watch --config build/webpack.config.js"
+    "api": "nodemon api/server.js"
   }
 }

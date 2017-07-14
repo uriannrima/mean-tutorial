@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const consign = require('consign');
 const MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 
@@ -8,6 +9,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
+
+consign({
+    cwd: './api'
+})
+    .include('database')
+    .then('repositories')
+    .then('controllers')
+    .then('routes')
+    .into(app);
+
+
+var api = express.Router().route('/todos');
 
 // Allow cors, just for test.
 app.use(function (req, res, next) {
@@ -23,9 +36,9 @@ var getAllTodos = function (req, res) {
     });
 }
 
-app.get('/api/todos', getAllTodos);
+api.get(getAllTodos);
 
-app.post('/api/todos', function (req, res) {
+api.post(function (req, res) {
     var todo = req.body.todo;
     app.db.collection('todos').insertOne({
         text: todo.text,
@@ -35,7 +48,7 @@ app.post('/api/todos', function (req, res) {
     });
 });
 
-app.delete('/api/todos/:todoId', function (req, res) {
+api.delete('/:todoId', function (req, res) {
     var _id = new ObjectId(req.params.todoId);
     app.db.collection('todos').deleteOne({ _id }).then(result => {
         res.sendStatus(200);
@@ -43,7 +56,7 @@ app.delete('/api/todos/:todoId', function (req, res) {
 
 });
 
-app.put('/api/todos', function (req, res) {
+api.put(function (req, res) {
     var todo = req.body.todo;
     const _id = new ObjectId(todo._id);
     delete todo._id;
@@ -63,11 +76,10 @@ var clearTodosDone = function (req, res, next) {
     });
 }
 
-app.post('/api/todos/clear', clearTodosDone, getAllTodos)
+api.post('/clear', clearTodosDone, getAllTodos);
 
-MongoClient.connect('mongodb://localhost:27017/mean-app').then(database => {
-    app.db = database;
-    app.listen(3003, function () {
-        console.log('Listening to ' + 3003);
-    });
+app.use('/api', api);
+
+app.listen(3003, function () {
+    console.log('Listening to ' + 3003);
 });

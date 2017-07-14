@@ -24,6 +24,10 @@ module.exports = {
     devtool: 'cheap-eval-source-map',
     devServer: {
         port: 3000,
-        hot: true
+        hot: true,
+        // When try a route localhost:port/:routeName redirect to index.html
+        historyApiFallback: {
+            index: 'index.html'
+        }
     }
 }

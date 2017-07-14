@@ -25,10 +25,10 @@
         <div class="col-md-12">
             <div ng-if="Todos.todosList.length" style="margin-top: 20px;">
                 <ul class="list-group">
-                    <li class="list-group-item clearfix" ng-repeat="todo in Todos.todosList track by $index" ng-class="{ done : todo.done }">
+                    <li class="list-group-item clearfix" ng-repeat="todo in Todos.todosList track by $index">
                         <div ng-if="!todo.edit">
                             <input type="checkbox" ng-model="todo.done" ng-click="Todos.save($index, todo)">
-                            <span ng-if="!todo.edit" style="vertical-align: top">{{ todo.text }}</span>
+                            <span ng-if="!todo.edit" ng-class="{ done : todo.done }" style="vertical-align: top">{{ todo.text }}</span>
                             <span class="pull-right">
                             <button class="btn btn-info" ng-click="todo.edit = true">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
